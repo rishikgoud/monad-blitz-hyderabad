@@ -57,7 +57,7 @@ export const Leaderboard = () => {
         </div>
 
         {/* Top 3 Podium */}
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           {leaderboardData.slice(0, 3).map((player, index) => {
             const positions = [1, 0, 2]; // 2nd, 1st, 3rd
             const actualIndex = positions[index];
@@ -86,36 +86,34 @@ export const Leaderboard = () => {
 
         {/* Full Leaderboard */}
         <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/20 rounded-xl overflow-hidden">
-          <div className="p-6">
+          <div className="p-2 sm:p-6">
             <h2 className="text-xl font-bold mb-4 text-cyan-300">Full Rankings</h2>
             
             <div className="space-y-3">
               {leaderboardData.map((player) => (
                 <div
                   key={player.rank}
-                  className={`flex items-center justify-between p-4 rounded-lg transition-all duration-300 hover:bg-white/10 ${
+                  className={`flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 sm:p-4 rounded-lg transition-all duration-300 hover:bg-white/10 overflow-x-auto ${
                     player.name.includes('You') 
                       ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/40' 
                       : 'bg-white/5'
                   }`}
+                  style={{ minWidth: 0 }}
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-2xl font-bold text-gray-400">#{player.rank}</span>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center flex-1 min-w-0 space-y-2 sm:space-y-0 sm:space-x-4">
+                    <div className="flex items-center space-x-2 min-w-0">
+                      <span className="text-lg sm:text-2xl font-bold text-gray-400 shrink-0">#{player.rank}</span>
                       {getRankIcon(player.rank)}
                     </div>
-                    
-                    <div className="text-2xl">{player.avatar}</div>
-                    
-                    <div>
-                      <h3 className="font-medium text-white">{player.name}</h3>
-                      <p className="text-sm text-gray-400">{player.badge}</p>
+                    <div className="text-xl sm:text-2xl">{player.avatar}</div>
+                    <div className="min-w-0">
+                      <h3 className="font-medium text-white truncate max-w-[120px] sm:max-w-[180px]">{player.name}</h3>
+                      <p className="text-xs sm:text-sm text-gray-400 truncate max-w-[120px] sm:max-w-[180px]">{player.badge}</p>
                     </div>
                   </div>
-                  
-                  <div className="text-right">
-                    <p className="font-bold text-cyan-300">Level {player.level}</p>
-                    <p className="text-sm text-gray-400">{player.xp} XP</p>
+                  <div className="text-left sm:text-right mt-2 sm:mt-0 min-w-0">
+                    <p className="font-bold text-cyan-300 text-sm sm:text-base whitespace-nowrap">Level {player.level}</p>
+                    <p className="text-xs sm:text-sm text-gray-400 whitespace-nowrap">{player.xp} XP</p>
                   </div>
                 </div>
               ))}

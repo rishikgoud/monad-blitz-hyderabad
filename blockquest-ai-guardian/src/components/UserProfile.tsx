@@ -125,23 +125,23 @@ export const UserProfile = ({ level, xp }: UserProfileProps) => {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Enhanced Stats */}
-          <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6 hover:bg-white/10 transition-all duration-300">
+          <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-4 sm:p-6 hover:bg-white/10 transition-all duration-300">
             <h2 className="text-xl font-bold mb-6 text-cyan-300">Statistics</h2>
             <div className="space-y-4">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
-                  <div key={index} className="flex items-center justify-between group hover:bg-white/5 p-2 rounded-lg transition-all duration-300">
-                    <div className="flex items-center space-x-3">
+                  <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between group hover:bg-white/5 p-2 rounded-lg transition-all duration-300 min-w-0">
+                    <div className="flex items-center space-x-3 min-w-0">
                       <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg group-hover:shadow-md transition-all duration-300">
                         <Icon className="w-4 h-4 text-cyan-400" />
                       </div>
-                      <div>
-                        <span className="text-gray-300 block">{stat.label}</span>
-                        <span className="text-xs text-green-400">{stat.trend}</span>
+                      <div className="min-w-0">
+                        <span className="text-gray-300 block truncate max-w-[120px] sm:max-w-[180px]">{stat.label}</span>
+                        <span className="text-xs text-green-400 truncate max-w-[120px] sm:max-w-[180px]">{stat.trend}</span>
                       </div>
                     </div>
-                    <span className="font-bold text-white text-lg">{stat.value}</span>
+                    <span className="font-bold text-white text-base sm:text-lg truncate max-w-[80px] sm:max-w-[120px]">{stat.value}</span>
                   </div>
                 );
               })}
@@ -191,24 +191,22 @@ export const UserProfile = ({ level, xp }: UserProfileProps) => {
         </div>
 
         {/* Badge Collection */}
-        <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6 mb-8 hover:bg-white/10 transition-all duration-300">
+        <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-4 sm:p-6 mb-8 hover:bg-white/10 transition-all duration-300">
           <h2 className="text-xl font-bold mb-6 text-cyan-300">Badge Collection</h2>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 sm:gap-4">
             {badges.map((badge, index) => (
               <div
                 key={index}
-                className={`border rounded-xl p-4 text-center transition-all duration-300 hover:scale-105 cursor-pointer ${
+                className={`border rounded-xl p-2 sm:p-4 text-center transition-all duration-300 hover:scale-105 cursor-pointer min-w-0 ${
                   badge.earned 
                     ? getRarityColor(badge.rarity) + ' hover:shadow-lg'
                     : 'border-gray-800 bg-gray-800/20 opacity-50'
                 }`}
               >
-                <div className="text-3xl mb-2">
-                  {badge.earned ? badge.icon : '🔒'}
-                </div>
-                <h3 className="font-medium text-white mb-1 text-sm">{badge.name}</h3>
-                <p className="text-xs text-gray-400 mb-2">{badge.description}</p>
+                <div className="text-2xl sm:text-3xl mb-1 sm:mb-2">{badge.earned ? badge.icon : '🔒'}</div>
+                <h3 className="font-medium text-white mb-1 text-xs sm:text-sm truncate max-w-[80px] sm:max-w-[120px] mx-auto">{badge.name}</h3>
+                <p className="text-xs text-gray-400 mb-1 sm:mb-2 truncate max-w-[100px] sm:max-w-[160px] mx-auto">{badge.description}</p>
                 <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
                   badge.rarity === 'Common' ? 'bg-gray-600 text-gray-300' :
                   badge.rarity === 'Uncommon' ? 'bg-green-600 text-green-300' :
@@ -219,7 +217,7 @@ export const UserProfile = ({ level, xp }: UserProfileProps) => {
                   {badge.rarity}
                 </span>
                 {badge.earned && badge.date && (
-                  <div className="text-xs text-gray-500 mt-1">{badge.date}</div>
+                  <div className="text-xs text-gray-500 mt-1 truncate max-w-[80px] mx-auto">{badge.date}</div>
                 )}
               </div>
             ))}
@@ -227,24 +225,24 @@ export const UserProfile = ({ level, xp }: UserProfileProps) => {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-6 hover:bg-white/10 transition-all duration-300">
+        <div className="bg-white/5 backdrop-blur-sm border border-cyan-500/20 rounded-xl p-4 sm:p-6 hover:bg-white/10 transition-all duration-300">
           <h2 className="text-xl font-bold mb-6 text-cyan-300">Recent Activity</h2>
           
-          <div className="space-y-4">
+          <div className="space-y-2 sm:space-y-4">
             {recentActivity.map((activity, index) => {
               const Icon = activity.icon;
               return (
-                <div key={index} className="flex items-center justify-between p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300 group">
-                  <div className="flex items-center space-x-4">
+                <div key={index} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-2 sm:p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all duration-300 group min-w-0">
+                  <div className="flex items-center space-x-2 sm:space-x-4 min-w-0">
                     <div className="p-2 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg group-hover:shadow-md transition-all duration-300">
                       <Icon className="w-5 h-5 text-cyan-400" />
                     </div>
-                    <div>
-                      <p className="text-white">{activity.action}</p>
-                      <p className="text-sm text-gray-400">{activity.time}</p>
+                    <div className="min-w-0">
+                      <p className="text-white truncate max-w-[120px] sm:max-w-[200px]">{activity.action}</p>
+                      <p className="text-xs sm:text-sm text-gray-400 truncate max-w-[100px] sm:max-w-[160px]">{activity.time}</p>
                     </div>
                   </div>
-                  <span className="font-medium text-green-400">{activity.xp}</span>
+                  <span className="font-medium text-green-400 text-xs sm:text-base mt-1 sm:mt-0 truncate max-w-[60px] sm:max-w-[100px]">{activity.xp}</span>
                 </div>
               );
             })}
